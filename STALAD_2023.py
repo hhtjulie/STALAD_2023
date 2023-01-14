@@ -11,7 +11,7 @@ from ObjectDefs import ESD_container
 import tensorflow as tf
 from tensorflow.keras import layers, losses
 
-
+print('hi')
 
 class STALAD:
     def __init__(self, train_data=None, val_data=None, test_data=None, max_latent_size: int = 9):
