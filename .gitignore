@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # My project
-.csv
-.xlsx
+*.csv
+*.xlsx
