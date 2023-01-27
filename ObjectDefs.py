@@ -13,7 +13,7 @@ import pandas as pd
 class ESD_container:
     raw_df: Optional[pd.DataFrame]
 
-    def __init__(self, data_path: str = '../OfficialData/GetDate_20180604_RF_alarm.csv',
+    def __init__(self, data_path: str = './OfficialData/GetDate_20180604_RF_alarm.csv',
                  ElapsedTime_col_idx: int = 1, StepNumber_col_idx: int = 4) -> None:
         """
         constructor

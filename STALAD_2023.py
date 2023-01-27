@@ -126,55 +126,7 @@ class STALAD:
             figure_filename = f'{saver_dir}/ErrorTrendWhenTraining.png'
             plt.savefig(figure_filename)
 
-
-    def save_const_as_txt(self, is_time_domain: bool = True):
-        pass
-        # Save all constant settings.
-        # with open(f"{saver_dir}/ConstantSettings.txt", "w") as text_file:
-        #     text_file.write("Specific constant settings for this round: ==========\n")
-        #     text_file.write(f"round_id = {round_id} # the index of the algorithm round\n")
-        #     text_file.write("\nSame constant settings across all rounds: ==========\n")
-        #     text_file.write(f"SVID name = {SVID_names[SVID_index]}\n")
-        #     text_file.write(f"selected Autoencoder domain: {'Time' if field == 'T' else 'Frequency'}\n")
-        #     text_file.write(f"training_dropout = {training_dropout}  # the ratio of dropout\n")
-        #     text_file.write(f"Obj = {Obj}  # the specified dataset object\n")
-        #     text_file.write(f"SVID_index = {SVID_index}  # the index of the specified SVID\n")
-        #     text_file.write(f"start_cycle = {start_cycle}  # the start cycle for the input data\n")
-        #     text_file.write(f"end_cycle = {end_cycle}  # the end cycle for the input data\n")
-        #     text_file.write(f"training_ratio = {training_ratio}  # the ratio of training data\n")
-        #     text_file.write(f"validate_ratio = {validate_ratio}  # the ratio of validation data\n")
-        #     text_file.write(f"EncActFunc = {EncActFunc}  # the activation function of the encoder part\n")
-        #     text_file.write(f"DecActFunc = {DecActFunc}  # the activation function of the decoder part\n")
-        #     text_file.write(f"optimizer = {optimizer}  # the optimizer for training\n")
-        #     text_file.write(f"max_bottleneck_length = {max_bottleneck_length}  "
-        #                     f"# the maximum length of the bottleneck hidden layer\n")
-        #     text_file.write(
-        #         f"error_points_resolution = {error_points_resolution}  # the resolution of the error points\n")
-        #     text_file.write(f"train_loop_times = {train_loop_times}  # the loop times of training\n")
-        #     if fast_train:
-        #         text_file.write("Caution: fast training is active. The model may be underfitting.\n")
-        #     text_file.write(f"figure_size = {figure_size}  # the figure size of results\n")
-        #     text_file.write("\nSome calculated results: ==========\n")
-        #     text_file.write(f"actual training cycles = {training_num}  # number of training cycles\n")
-        #     text_file.write(f"actual validation cycles = {validate_num}  # number of validation cycles\n")
-        #     text_file.write(f"actual testing cycles = {ML_testing_set.shape[0]}  # number of testing cycles\n")
-        #     text_file.write(f"Number of layer neurons: {neuron_num_per_layer}\n")
-        #     text_file.write(f"Best model: iteration {best_iteration} with its validation error {best_validate_error}\n")
-        #     text_file.write(f'Judgement threshold: {judge_threshold} = {judge_mean} + 3 * {judge_std}\n')
-        #     if ML_testing_set != 0:
-        #         text_file.write(f'There are {exceed_cycle_num} abnormal cycles in testing dataset: {exceed_cycles}\n')
-        #     text_file.write(f'Time cost of the extraction phase over {ML_training_set.shape[0]} training wafers '
-        #                     f'and {ML_validation_set.shape[0]} validation wafers: {tTotal_extraction:.3f} seconds\n')
-        #     if ML_testing_set != 0:
-        #         text_file.write(f'Time cost of the testing phase over {ML_testing_set.shape[0]}'
-        #                         f' wafers: {tTotal_testing:.3f} seconds\n')
-        #     text_file.write('Difference values of each cycle:')
-        #     for diff_value in all_cycle_losses:
-        #         text_file.write(f' {diff_value:.3g}')
-        #     text_file.write('\n')
-
-
-def get_data(data_path: str = '../OfficialData/GetDate_20180604_RF_alarm.csv', SVID: int = 8,
+def get_data(data_path: str = './OfficialData/GetDate_20180604_RF_alarm.csv', SVID: int = 8,
              is_time_domain: bool = True, train_ratio: float = 0.7, val_ratio: float = 0.1):
     if is_time_domain:
         input_data = ESD_container(data_path).get_trim_cycles_single_SVID(SVID)
@@ -196,22 +148,11 @@ if __name__ == '__main__':
     print(type(val_data))
     print(type(test_data))
     print(isinstance(train_data,np.ndarray))
-    # STALAD = STALAD(train_data, val_data, test_data)
-    # print(STALAD.layer_size_list)
-    # print(STALAD.train_data)
-    # STALAD.train_SAE(epoch_num=10)
-    # a = STALAD.get_threshold()
-    # print(a)
-    # vec = STALAD.get_difference_value()
-    # print(vec)
-    #
-    # # select a set of background examples to take an expectation over
-    # background = train_data[np.random.choice(train_data.shape[0], 30, replace=False)]
-
-    # e = shap.Explainer(STALAD.SAE)
-    # print(STALAD.SAE)
-    # print(background.shape)
-    # print(test_data[0].shape)
-    # shap_values = e(test_data)
-    # print(shap_values)
-    # shap.plots.waterfall(shap_values[0])
+    STALAD = STALAD(train_data, val_data, test_data)
+    print(STALAD.layer_size_list)
+    print(STALAD.train_data)
+    STALAD.train_SAE(epoch_num=10)
+    a = STALAD.get_threshold()
+    print(a)
+    vec = STALAD.get_difference_value()
+    print(vec)
