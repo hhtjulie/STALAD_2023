@@ -96,7 +96,7 @@ class STALAD:
             input_cycle_ticks = np.linspace(0.0, 0.5, self.input_size)
         x_label_name = 'time (sec)' if is_time_domain else 'frequency (Hz)'
         y_label_name = 'value' if is_time_domain else 'magnitude'
-        output_data = self.get_decoded_test_data()
+        output_data = self.get_decoded_data()
         # plot decoded training cycles
 
         def plot_Input_vs_Decode(input_data, input_type: str = 'Train'):  # input can be val_data/train_data
